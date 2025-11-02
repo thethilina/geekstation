@@ -1,0 +1,39 @@
+import { queryDatabase } from '../../../db';
+import { NextResponse } from 'next/server';
+
+export async function POST(req) {
+    try {
+        const FormData = await req.formData();
+        const userName = FormData.get('username');
+        const password = FormData.get('password');
+
+        const usercheckQry01 = `
+            SELECT [UserID]
+                ,[UserName]
+                ,[Email]
+                ,[password]
+                ,[Role]
+            FROM [dbo].[USER_MST]
+            WHERE ([UserName] = '${userName}' OR [Email] = '${userName}') AND [password] = '${password}'
+        `
+        const usercheckResult = await queryDatabase(usercheckQry01);
+
+        if (usercheckResult.length === 1) {
+                const res = NextResponse.json({ success: true })
+
+                res.cookies.set('token', usercheckResult[0].UserID, {
+                httpOnly: true,
+                path: '/',
+                maxAge: 60 * 60, // this is the place that we controle our cookie timeout period, we must enter values in seconds
+                sameSite: 'lax',
+                secure: process.env.NODE_ENV === 'production',
+                })
+            return res;
+        } else {
+            return NextResponse.json({ success: false, message: 'Username or Password is incorrect' });
+        }
+
+    } catch (err) {
+        return new Response(JSON.stringify({Error: err.message}), {status: 500});
+    }
+}
