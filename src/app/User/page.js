@@ -8,7 +8,7 @@ export default function page() {
   useEffect(() => {
 
     const fetchPosts = async () => {
-      const posts = await fetch ('../../api/user/post');
+      const posts = await fetch ('../../api/blog/post');
 
       const data = await posts.json()
 

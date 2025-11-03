@@ -14,7 +14,7 @@ export default function page({ params }) {
         const getchChoosedPost = async () => {
 
             const respond = await fetch(
-                `../../api/user/post/choosedPost?PostID=${PostID}`
+                `../../api/blog/post/choosedPost?PostID=${PostID}`
             );
 
             const data = await respond.json();

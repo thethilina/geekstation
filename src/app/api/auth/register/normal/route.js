@@ -1,10 +1,9 @@
-import { RequestError } from "mssql";
-import { queryDatabase } from "../../../db";
+import { queryDatabase } from "../../../../db";
 
 let userNameForErrors = ""; // these variavles to save userName and the email globally to handle catch section errors
 let emailForErrors = "";
 
-// This is the Register function for Patients
+// This is the Register function for Normal USERS
 // We are not allowing users to choose their roles when they are registering
 // because that can be a security issue
 // So all the users who are registering through this form will be Patients
