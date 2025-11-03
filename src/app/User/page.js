@@ -8,7 +8,7 @@ export default function page() {
   useEffect(() => {
 
     const fetchPosts = async () => {
-      const posts = await fetch ('../../api/blog/post');
+      const posts = await fetch ('../../api/user/post');
 
       const data = await posts.json()
 
@@ -27,10 +27,10 @@ export default function page() {
         <div className='flex justify-center flex-wrap items-center w-full h-auto gap-2'>
         {posts.length > 0 ? (
           posts.map((post, index) => (
-            <Link key={index} className='w-[300px] h-[150px] border border-black flex flex-col justify-center items-center' href={`User/${post.PostID}`}>
+            <div key={index} className='w-[300px] h-[150px] border border-black flex flex-col justify-center items-center'>
               <p className='font-bold text-[20px] text-black'>{post.Topic}</p>
               <p className='text-[15px] text-gray-600'>{post.FName} {post.LName}</p>
-            </Link>
+            </div>
           ))
         ) : (
           <p>No posts available.</p>

@@ -26,7 +26,7 @@ export default function page() {
     formdata.append("content", content);
     formdata.append("uid", uid);
 
-    const response = await fetch("../../api/blog/add", {
+    const response = await fetch("../../api/user/add", {
       method: "POST",
       body: formdata,
     });
