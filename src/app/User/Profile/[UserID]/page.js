@@ -1,15 +1,13 @@
 "use client";
-import React, { useEffect, useState, use } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Page({ params }) {
-  const resolvedUserID = use(params);
-  const userID = resolvedUserID.UserID;
+  const userID = params.UserID;
 
   const [getAlluserData, setAllUserData] = useState(null);
   const [getAllPostData, setAllPostData] = useState([]);
-  const [Bday, setBday] = useState(Date)
-  // Handeling Loading
+  const [Bday, setBday] = useState("");
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,24 +16,22 @@ export default function Page({ params }) {
         setLoading(true);
         const respond = await fetch(`../../../api/user/profile?uid=${userID}`);
         const userDatas = await respond.json();
-        console.log("API RESPONSE:", userDatas);
 
         setAllUserData(userDatas.userData[0] || null);
         setAllPostData(userDatas.postData || []);
-        
+
         const dateStr = userDatas.userData[0].BrithDay;
         const formattedDate = dateStr ? dateStr.split("T")[0] : "";
         setBday(formattedDate);
-
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching user data:", error);
+      } finally {
         setLoading(false);
       }
     };
 
     getUserData();
-  }, [params.UserID]);
+  }, [userID]);
 
   return (
     <div className="w-full flex flex-col justify-center items-center gap-5">

@@ -1,9 +1,9 @@
 'use client'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar';
 
-export default function page() {
+
+export default function Page() {
 
   const [posts, setPosts] = useState([]);
 
