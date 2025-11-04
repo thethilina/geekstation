@@ -23,6 +23,10 @@ const blogupquery = ` UPDATE POST_DTL
                     WHERE [postID] = '${postID}'
 
 ` 
+
+
+//update the table
+
 const updatedblog = await queryDatabase(blogupquery)
 
 
@@ -31,7 +35,7 @@ return new NextResponse(JSON.stringify({Message:"Blog updated successfully"}) , 
 
 }catch(e){
 
-
+return new NextResponse(JSON.stringify("Error updating blog table"+e.message) , {status:500})
 
 
 }
