@@ -26,21 +26,20 @@ export async function POST(req) {
 
     // now we cant insert these values to the database
     const insertQry = `
-
-            INSERT INTO [dbo].[POST_DTL]
+      INSERT INTO [dbo].[POST_DTL]
                 ([PostID]
                 ,[UserID]
                 ,[Topic]
-                ,[post]
-                ,[Image])
-            VALUES (
-
+                ,[Post]
+                ,[Image]
+                ,[Cate])
+          VALUES (
                 '${newBlogId}',
                 '${authorId}',
                 '${postTitle}',
                 '${postContent}',
-                ''
-
+                '',
+                'GAM'
             )
         
         `;
