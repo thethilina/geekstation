@@ -7,20 +7,26 @@ export async function GET() {
     const tokens = cookieStore.get("token")?.value;
 
     let tokenValue;
+    let fullName;
 
     if (tokens) {
-      const userRoleQuery = `SELECT [Role]
+      const userRoleQuery = `
+              SELECT [Role]
+                  ,[FName]
+                  ,[LName]
               FROM [dbo].[USER_MST]
               WHERE [UserId] = '${tokens}'
           `;
       const userRoleResult = await queryDatabase(userRoleQuery);
 
       tokenValue = userRoleResult[0]?.Role;
+      fullName = userRoleResult[0]?.FName+" "+userRoleResult[0]?.LName;
+
     } else if (!tokens) {
       tokenValue = "NO";
     }
 
-    return new Response(JSON.stringify({ role: tokenValue }), {
+    return new Response(JSON.stringify({ role: tokenValue, name: fullName, uid: tokens}), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
