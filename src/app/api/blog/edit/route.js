@@ -45,3 +45,33 @@ return new NextResponse(JSON.stringify("Error updating blog table"+e.message) , 
 
 
 }
+
+/*
+    THILINA PLEASE REFER MY FUNCTION 
+*/
+
+export async function POST(req) {
+
+    try {
+
+        const FormData = await req.formData();
+        const title = FormData.get("title");
+        const postBody = FormData.get("body");
+        const postID = FormData.get("pid");
+
+        const updateQuery = `
+        UPDATE [dbo].[POST_DTL]
+        SET [Topic] = '${title}'
+            ,[Post] = '${postBody}'
+        WHERE [PostID] = '${postID}'
+        `;
+
+        await queryDatabase(updateQuery);
+
+        return new Response(JSON.stringify({Message :'S'}),  {status: 200});
+
+    } catch (err) {
+
+        return new Response(JSON.stringify({Message : err.message}), {status : 400});
+    }
+}

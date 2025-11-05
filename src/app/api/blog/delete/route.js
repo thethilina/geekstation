@@ -44,3 +44,28 @@ return new NextResponse(JSON.stringify("Error deleting blog"+e.message) , {statu
 
 
 }
+
+/*
+    THILINA REFER MY FUNCTION PLEASE
+*/
+
+export async function GET(req) {
+
+    try {
+
+        const { searchParams } = new URL(req.url);
+        const postID = searchParams.get("pid");
+
+        const deleteQuery = `
+            DELETE FROM [dbo].[POST_DTL]
+            WHERE [PostID] = '${postID}'
+        `;
+
+        await queryDatabase(deleteQuery);
+
+        return new Response(JSON.stringify({Message: 'S'}), {status: 200});
+    } catch (err) {
+
+        return new Response(JSON.stringify({Message : err.message}), {status : 400});
+    }
+}

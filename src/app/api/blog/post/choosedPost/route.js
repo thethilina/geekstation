@@ -13,6 +13,7 @@ export async function GET(req) {
                 ,B.[Image]
                 ,U.[FName]
                 ,U.[LName]
+                ,B.[UserID]
             FROM [dbo].[POST_DTL] AS B
             INNER JOIN [dbo].[USER_MST] AS U
             ON B.[UserID] = U.[UserID]
