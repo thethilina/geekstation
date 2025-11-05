@@ -8,16 +8,18 @@ export async function GET() {
 
     let tokenValue;
     let fullName;
+    let userRoleResult
 
     if (tokens) {
       const userRoleQuery = `
               SELECT [Role]
                   ,[FName]
                   ,[LName]
+                  ,[Image]
               FROM [dbo].[USER_MST]
               WHERE [UserId] = '${tokens}'
           `;
-      const userRoleResult = await queryDatabase(userRoleQuery);
+      userRoleResult = await queryDatabase(userRoleQuery);
 
       tokenValue = userRoleResult[0]?.Role;
       fullName = userRoleResult[0]?.FName+" "+userRoleResult[0]?.LName;
@@ -26,7 +28,7 @@ export async function GET() {
       tokenValue = "NO";
     }
 
-    return new Response(JSON.stringify({ role: tokenValue, name: fullName, uid: tokens}), {
+    return new Response(JSON.stringify({ role: tokenValue, name: fullName, uid: tokens, box: userRoleResult}), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });

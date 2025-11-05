@@ -1,4 +1,6 @@
+export const runtime = "nodejs";
 import { queryDatabase } from "../../../db";
+import { UPLOAD_TO } from "../../cloudinary/cloudinary";
 
 export async function GET(req) {
   try {
@@ -54,12 +56,18 @@ export async function POST(req) {
     const about = FormData.get("about");
     const userID = FormData.get("uid");
     const BDay = FormData.get("Bday");
+    const image = FormData.get("image")
+
+    const replyImage = await UPLOAD_TO(image);
+    console.log(replyImage, "TEXT.....")
+
 
     const updateQuery = `
             UPDATE [dbo].[USER_MST]
             SET [UserName] = '${userName}'
                 ,[BrithDay] = '${BDay}'
                 ,[About] = '${about}'
+                ,[Image] = '${replyImage}'
                 ,[CreatedAt] = (SELECT [CreatedAt] FROM [dbo].[USER_MST] WHERE [UserID] = '${userID}')
                 ,[UpdateAt] = (GETDATE())
             WHERE [UserID] = '${userID}'
@@ -67,7 +75,7 @@ export async function POST(req) {
 
     await queryDatabase(updateQuery);
 
-    return new Response(JSON.stringify({ didSuccess: "S" }), { status: 200 });
+    return new Response(JSON.stringify({ didSuccess: "S" , url : replyImage}), { status: 200 });
   } catch (err) {
     return new Response(
       JSON.stringify({ message: err.message, didSuccess: "F" }),

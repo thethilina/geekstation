@@ -45,6 +45,7 @@ export default function Page({params}) {
         if(replyEditRespond.Message === 'S') {
 
             router.push("/");
+            alert(replyEditRespond)
             
         } else {
             alert(replyEditRespond.Message);

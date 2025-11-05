@@ -9,6 +9,7 @@ export default function Page() {
   const [Bday, setBday] = useState("");
   const [about, setAbout] = useState("");
   const [userID, setUserID] = useState("");
+  const [Imaged, setImage] = useState(null);
 
   useEffect(() => {
     const getOldValues = async () => {
@@ -45,6 +46,7 @@ export default function Page() {
     formData.append("Bday", Bday);
     formData.append("about", about);
     formData.append("uid", userID);
+    formData.append("image", Imaged);
 
     const respond = await fetch("../../../api/user/profile", {
       method: "POST",
@@ -55,6 +57,7 @@ export default function Page() {
 
     if (updatedResult.didSuccess === "S") {
       router.push("/");
+      console.log(updatedResult.url);
     } else {
       alert(updatedResult.message);
     }
@@ -88,6 +91,13 @@ export default function Page() {
           className="border-1 border-black rounded-[5px] w-[300px] h-[50px] pl-[10px]"
           defaultValue={about}
           onChange={(e) => setAbout(e.target.value)}
+        />
+
+        <input
+          type="file"
+          placeholder="select an Image"
+          className="border-1 border-black rounded-[5px] w-[300px] h-[50px] pl-[10px]"
+          onChange={(e) => setImage(e.target.files[0])}
         />
 
         <button
