@@ -1,40 +1,55 @@
-"use client";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
+//Thilina Dewmina
+import { IoIosSearch } from "react-icons/io";
+import { GoPlus } from "react-icons/go";
 
-export default function Navbar() {
-  const [userData, setUSerData] = useState([]);
+export  default function  Nav(){
 
-  useEffect(() => {
-    const getUserID = async () => {
-      const res = await fetch("../api/token/checkToken");
+return(
 
-      const data = await res.json();
-      setUSerData(data);
-    };
+<nav className="flex font-gothic top-0  fixed w-full text-[#71CA84] items-center justify-between px-20 py-3 border-b-2 border-gray-500">
 
-    getUserID();
-  }, []);
+{/*logo*/}
+<div className="text-xl font-semibold">
+GEEK STATION    
+</div>
 
-  async function logout() {
-    await fetch("/app/api/logout", { method: "POST" });
-    window.location.href = "/auth/Login";
-  }
-  return (
-    <div className="w-full flex flex-row h-[50px] bg-[#000000] text-green-500 justify-center items-center gap-10">
-      <Link href="/">GEEKSTATION</Link>
+{/*searchbar*/}
 
-      <Link href="/User/Add">Add a Post</Link>
+<form className="flex py-1  ">    
+<input type="text" className="border-l-2 border-t-2 border-b-2   text-white  border-gray-500  pl-15 py-2 rounded-l-3xl bg-[#161616]"/>
+<button className="rounded-r-3xl border-r-2  border-t-2 border-b-2  py-2 border-gray-500 pr-4  bg-[#2D2D2D] hover:cursor-pointer hover:bg-[#202020]">
+<IoIosSearch size={23} className="text-white ml-2"/>
+</button>
+</form>
 
-      {userData && userData.uid ? (
-        <Link href={`/User/Profile/${userData.uid}`}>{userData.name}</Link>
-      ) : (
-        <p>NO USER</p>
-      )}
 
-      <button onClick={logout} className="text-red-500 hover:cursor-pointer">
-        LOG OUT
-      </button>
-    </div>
-  );
+{/*right 3 buttons*/}
+
+<div className="flex gap-15">
+
+{/*create post button*/}
+<button className="bg-[#161616] p-1 px-2 rounded-xl border-gray-500 border-1 hover:cursor-pointer hover:bg-[#202020]">
+<GoPlus size={25} className="text-white"/>
+</button>
+
+{/*account*/}
+<div className="w-10 h-10 bg-gray-500 rounded-4xl">
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+</nav>
+
+
+)
+
+
 }

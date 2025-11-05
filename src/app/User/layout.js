@@ -1,8 +1,8 @@
 import { Poppins } from "next/font/google";
 import "../globals.css";
 import Navbar from "../components/Navbar";
-import Nav from "../../compontents/Navbar"
-import SideNav from "../../compontents/SideNav"
+import Nav from "../components/Navbar"
+import SideNav from "../components/SideNav"
 
 
 const poppa = Poppins({
