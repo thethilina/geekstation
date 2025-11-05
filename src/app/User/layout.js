@@ -2,6 +2,8 @@ import { Poppins } from "next/font/google";
 import "../globals.css";
 import Navbar from "../components/Navbar";
 import Nav from "../../compontents/Navbar"
+import SideNav from "../../compontents/SideNav"
+
 
 const poppa = Poppins({
   weight: ["100","200","400","600", "700"],
@@ -19,6 +21,7 @@ export default function RootLayout({ children }) {
     className={poppa.className}
     >
     <Nav/>
+    <SideNav/>
     {children}
     </div>
 

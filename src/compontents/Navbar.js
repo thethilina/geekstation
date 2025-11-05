@@ -6,7 +6,7 @@ export  default function  Nav(){
 
 return(
 
-<nav className="flex font-gothic  text-[#71CA84] items-center justify-between px-20 py-3 border-b-1 border-gray-500">
+<nav className="flex font-gothic top-0  text-[#71CA84] items-center justify-between px-20 py-3 border-b-2 border-gray-500">
 
 {/*logo*/}
 <div className="text-2xl font-semibold">
@@ -17,7 +17,7 @@ GEEK STATION
 
 <form className="flex py-1  ">    
 <input type="text" className="border-l-2 border-t-2 border-b-2   text-white  border-gray-500  pl-15 py-2 rounded-l-3xl bg-[#161616]"/>
-<button className="rounded-r-3xl border-r-2  border-t-2 border-b-2  py-2 border-gray-500 pr-4  bg-[#2D2D2D]">
+<button className="rounded-r-3xl border-r-2  border-t-2 border-b-2  py-2 border-gray-500 pr-4  bg-[#2D2D2D] hover:cursor-pointer hover:bg-[#202020]">
 <IoIosSearch size={23} className="text-white ml-2"/>
 </button>
 </form>
@@ -28,7 +28,7 @@ GEEK STATION
 <div className="flex gap-15">
 
 {/*create post button*/}
-<button className="bg-[#161616] p-1 px-2 rounded-xl border-gray-500 border-1">
+<button className="bg-[#161616] p-1 px-2 rounded-xl border-gray-500 border-1 hover:cursor-pointer hover:bg-[#202020]">
 <GoPlus size={25} className="text-white"/>
 </button>
 
